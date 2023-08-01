@@ -1,3 +1,9 @@
+# Steps to run the project
+1-Clone the repo
+2- Do npm instal to download the dependencies
+3- Run the server using command - node server.js
+4- Start the react development server by - npm start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
