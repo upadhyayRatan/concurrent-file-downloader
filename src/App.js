@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'
+import axios from 'axios';
 
 function App() {
+  const [urlList, setUrlList] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleDownload = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/download', { urls: urlList.split('\n') });
+      setMessage(response.data.message);
+    } catch (error) {
+      setMessage(`Error: ${error.response.data.error}`);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>File Downloader</h1>
+      <textarea
+        placeholder="Enter file URLs, one per line"
+        value={urlList}
+        onChange={(event) => setUrlList(event.target.value)}
+      />
+      <br />
+      <button onClick={handleDownload}>Download</button>
+      <br />
+      <p>{message}</p>
     </div>
   );
 }
