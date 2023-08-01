@@ -36,10 +36,12 @@ app.post("/download", async (req, res) => {
 
     // Download the file asynchronously
     downloadFile(url)
+      // eslint-disable-next-line no-loop-func
       .then(() => {
         numConcurrentDownloads--;
         console.log(`Downloaded file: ${url}`);
       })
+      // eslint-disable-next-line no-loop-func
       .catch((error) => {
         numConcurrentDownloads--;
         console.error(`Error downloading file: ${url} - ${error.message}`);
